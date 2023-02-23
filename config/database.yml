@@ -84,4 +84,4 @@ production:
   database: sneaker_api_new_production
   username: sneaker_api_new
   password: <%= ENV["SNEAKER_API_NEW_DATABASE_PASSWORD"] %>
-  url: <%= ENV["SNEAKER_API_NEW_DATABASE_URL"] %>
+  url: <%= ENV["DATABASE_URL"] %>
