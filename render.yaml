@@ -1,0 +1,18 @@
+databases: 
+  - name: sneaker_api_new
+    databaseName: sneaker_api_new
+    user: uchenry4
+
+services: 
+  - type: web
+    name: sneaker_api_new
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars: 
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sneaker_api_new
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
