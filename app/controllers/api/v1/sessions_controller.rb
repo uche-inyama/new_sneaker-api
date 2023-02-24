@@ -12,6 +12,10 @@ class Api::V1::SessionsController < Devise::SessionsController
 			time = Time.now + 24.hours.to_i
 			render json: { current_user: @user, token: token, exp: time.strftime("%m-%d-%Y %H:%M")}, status: :ok
 			log_in(@user)
+			respond_to do |format|
+				format.html { redirect_to products_path }
+				format.json { render json: @user, status: :ok }
+			end
 		else
 			render json: { error: 'unauthorized' }, status: :unauthorized
 		end
