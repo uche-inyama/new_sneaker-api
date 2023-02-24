@@ -1,0 +1,8 @@
+<div>
+	<%= form_with(model: product) do |form| %>
+		<div><%=form.text_field :name, placeholder: "name" %></div>
+		<div><%=form.number_field :product_price, placeholder: "price" %></div>
+		<div><%=form.number_field :product_discount, placeholder: "discount" %></div>
+		<div><%=form.text_area :marketing_statement, placeholder: "Marketing statement" %></div>
+	<% end %>
+</div>
