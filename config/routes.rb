@@ -9,6 +9,5 @@ Rails.application.routes.draw do
       root to: "api/v1/sessions#new"
     end
   end
-
   resources :products
 end
