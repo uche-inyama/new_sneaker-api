@@ -72,5 +72,7 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
-
+gem  "shrine-cloudinary",  "~> 1.1"
+gem  "dotenv-rails"
+gem  "shrine"
 

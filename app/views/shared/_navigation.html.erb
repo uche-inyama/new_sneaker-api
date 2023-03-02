@@ -1,0 +1,9 @@
+<div> 
+  <% if current_user %>
+    <%= link_to 'Home', products_path %>
+    <%= link_to "new product", new_product_path  if current_user %>
+    <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+  <% else %> 
+  <%= link_to  'Sign in', new_user_session_path %>
+  <% end %> 
+</div>

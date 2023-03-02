@@ -6,15 +6,14 @@ class Api::V1::SessionsController < Devise::SessionsController
 	end
 
 	def create
-		@user = User.find_by(email: params[:email])
-		if @user && @user.valid_password?(params[:password])
+		@user = User.find_by(email: params[:user][:email])
+		if @user && @user.valid_password?(params[:user][:password])
 			token = JsonWebToken.encode(user_id: @user.id)
 			time = Time.now + 24.hours.to_i
-			render json: { current_user: @user, token: token, exp: time.strftime("%m-%d-%Y %H:%M")}, status: :ok
 			log_in(@user)
 			respond_to do |format|
 				format.html { redirect_to products_path }
-				format.json { render json: @user, status: :ok }
+				format.json {	render json: { current_user: @user, token: token, exp: time.strftime("%m-%d-%Y %H:%M")}, status: :ok }
 			end
 		else
 			render json: { error: 'unauthorized' }, status: :unauthorized
@@ -26,5 +25,6 @@ class Api::V1::SessionsController < Devise::SessionsController
 	end
 
 	def destroy
+		super
 	end
 end
