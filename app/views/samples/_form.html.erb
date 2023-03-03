@@ -1,0 +1,7 @@
+<%= form_with(model: [product, sample]) do |form| %>
+  <span>
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+  </span>
+  <span ><%= form.submit %></span>
+<% end %>

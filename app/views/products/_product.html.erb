@@ -3,4 +3,5 @@
   <p><%=product.product_price %></p> 
   <p><%=product.product_discount %></p> 
   <p><%=product.marketing_statement %></p>
+  <%= link_to "add samples", new_product_sample_path(product) %>
 </div>
