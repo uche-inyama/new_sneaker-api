@@ -3,9 +3,10 @@ class ProductsController < ApplicationController
 
 	def index
 		@products = Product.all
+		# render json: @products, status: :ok
 		respond_to do |format|
+			format.json { render json: @products, status: :ok }
 			format.html
-			format.json { render json: @product, status: :ok }
 		end
 	end
 
@@ -13,17 +14,20 @@ class ProductsController < ApplicationController
 		@product = Product.new
 	end
 
-	def create 
+	def create
 		@product = Product.new(product_params)
 		respond_to do |format|
 			if @product.save
-				format.html { }
+				format.html
 				format.json { render json: @product, status: :ok }
 			else
 				format.html {render :new }
 				format.json { render json: :unprocessable_entity }
 			end
 		end
+	end
+
+	def show
 	end
 
 	def product_params

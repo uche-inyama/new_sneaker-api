@@ -1,6 +1,10 @@
 class SamplesController < ApplicationController
   before_action :set_product
 
+  def index
+    @product_samples = @product.samples
+  end
+
   def new
     @sample = @product.samples.build
   end

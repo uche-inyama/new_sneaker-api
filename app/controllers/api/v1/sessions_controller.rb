@@ -15,6 +15,7 @@ class Api::V1::SessionsController < Devise::SessionsController
 				format.html { redirect_to products_path }
 				format.json {	render json: { current_user: @user, token: token, exp: time.strftime("%m-%d-%Y %H:%M")}, status: :ok }
 			end
+			# render json: { current_user: @user, token: token }, status: :ok
 		else
 			render json: { error: 'unauthorized' }, status: :unauthorized
 		end
