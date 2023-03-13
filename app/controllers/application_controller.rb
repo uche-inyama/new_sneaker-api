@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
 	skip_before_action :verify_authenticity_token
-	before_action :configure_permitted_parameters, if: :devise_controller?
 	include SessionsHelper
 	include JsonWebToken
 
@@ -19,11 +18,5 @@ class ApplicationController < ActionController::Base
 		rescue JWT::DecodeError => e
 			render json: { errors: e.message }, status: :unauthorized
 		end
-	end
-
-	protected
-
-	def configure_permitted_parameters
-		devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
 	end
 end

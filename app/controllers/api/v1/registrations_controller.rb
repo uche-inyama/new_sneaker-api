@@ -1,4 +1,6 @@
 class Api::V1::RegistrationsController < Devise::RegistrationsController
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   def new
     @user = User.new
   end
@@ -8,7 +10,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
     respond_to do |format|
       if @user.save
         format.json { render json: @user, status: :ok }
-        format.html { redirect_to products_path }
+        # format.html { redirect_to products_path }
       else
         format.json { render json: :unprocessable_entity }
         format.html { render :new }
@@ -19,6 +21,10 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   private
 
   def user_params
-    params.require(:user).permit(:email, :username, :password, :password_confirmation)
+    params.permit(:email, :username, :password, :password_confirmation)
   end
+
+	def configure_permitted_parameters
+		devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
+	end
 end

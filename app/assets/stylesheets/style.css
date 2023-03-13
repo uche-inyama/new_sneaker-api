@@ -1,0 +1,23 @@
+.navigation {
+  padding: 20px 0;
+}
+
+.text-decoration-none {
+  text-decoration: none
+}
+
+.font-family {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.nav-color {
+  background-color: #5d79f5;
+  color: #fff;
+}
+
+.nav-links {
+  width: 200px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}

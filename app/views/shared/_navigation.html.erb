@@ -1,9 +1,9 @@
-<div> 
-  <% if current_user %>
-    <%= link_to 'Home', products_path %>
-    <%= link_to "new product", new_product_path  if current_user %>
-    <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
-  <% else %> 
-  <%= link_to  'Sign in', new_user_session_path %>
+<div class="d-flex justify-content-between w-auto navigation font-family">
+  <% if current_admin %>
+    <div class="nav-links">
+      <%= link_to 'Home', products_path, class: "text-decoration-none nav-color" %>
+      <%= link_to "New product", new_product_path, class: "nav-color text-decoration-none" if current_admin %>
+    </div>
+    <%= link_to 'Sign out', destroy_admin_session_path, class: "text-decoration-none btn btn-primary", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
   <% end %> 
 </div>
