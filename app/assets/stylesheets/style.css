@@ -24,5 +24,11 @@
 
 .sign-out-button {
   display: grid;
+  grid-template-columns: 1fr 1fr;
   place-content: center;
+  grid-gap: 10px;
+}
+
+.username {
+  align-self: center;
 }
