@@ -1,9 +1,12 @@
-<div class="d-flex justify-content-between w-auto navigation font-family">
+<div class="d-grid w-auto navigation font-family">
+  <h3>Sneaker Shop</h3>
   <% if current_admin %>
     <div class="nav-links">
-      <%= link_to 'Home', products_path, class: "text-decoration-none nav-color" %>
-      <%= link_to "New product", new_product_path, class: "nav-color text-decoration-none" if current_admin %>
+      <%= link_to 'Home', products_path, class: "text-decoration-none nav-color d-block" %>
+      <%= link_to "New product", new_product_path, class: "d-block nav-color text-decoration-none" if current_admin %>
     </div>
-    <%= link_to 'Sign out', destroy_admin_session_path, class: "text-decoration-none btn btn-primary", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
-  <% end %> 
+    <div class="sign-out-button">
+      <%= link_to 'Sign out', destroy_admin_session_path, class: "text-decoration-none btn btn-primary", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+    </div>
+  <% end %>
 </div>

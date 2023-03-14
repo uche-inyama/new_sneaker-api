@@ -1,5 +1,6 @@
 .navigation {
   padding: 20px 0;
+  grid-template-columns: 1fr 3fr 1fr;
 }
 
 .text-decoration-none {
@@ -16,8 +17,12 @@
 }
 
 .nav-links {
-  width: 200px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   align-items: center;
+  gap: 20px;
+}
+
+.sign-out-button {
+  display: grid;
+  place-content: center;
 }

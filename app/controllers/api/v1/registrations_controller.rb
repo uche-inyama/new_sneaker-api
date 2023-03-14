@@ -1,5 +1,4 @@
 class Api::V1::RegistrationsController < Devise::RegistrationsController
-  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def new
     @user = User.new
@@ -24,7 +23,4 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
     params.permit(:email, :username, :password, :password_confirmation)
   end
 
-	def configure_permitted_parameters
-		devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
-	end
 end

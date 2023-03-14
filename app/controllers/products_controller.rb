@@ -1,10 +1,9 @@
 class ProductsController < ApplicationController
 	before_action :current_user
-	before_action :get_product, only: [:show]
+	before_action :get_product, only: [:show, :edit, :update, :destroy]
 
 	def index
 		@products = Product.all
-		# render json: @products, status: :ok
 		respond_to do |format|
 			format.json { render json: @products, status: :ok }
 			format.html
@@ -30,6 +29,24 @@ class ProductsController < ApplicationController
 
 	def show
 		render json: @product
+	end
+
+	def edit
+	end
+
+	def update
+		respond_to do |format|
+			if @product.update(product_params)
+				format.html { redirect_to products_path }
+				format.json { render json: @product, status: :ok }
+			else
+				render :edit
+			end
+		end
+	end
+
+	def destroy
+		@product.destroy
 	end
 
 	def product_params

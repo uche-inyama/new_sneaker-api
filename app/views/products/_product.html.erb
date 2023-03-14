@@ -2,6 +2,15 @@
   <h3><%=product.name %></h3>
   <p><%=product.product_price %></p> 
   <p><%=product.product_discount %></p> 
-  <p><%=product.marketing_statement %></p>
-  <%= link_to "Add samples", new_product_sample_path(product) %>
+  <p><%=product.marketing_statement %> 
+    <span> <%= link_to  "Edit", edit_product_path(product), class: "text-decoration-none text-primary" %></span>
+    <span> <%= link_to  "Delete", product_path(product), class: "text-decoration-none text-danger" ,data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></span>
+  </p>
+  <div>
+    <% if product.check_sample_count? %>
+      <%= link_to "Add samples", new_product_sample_path(product) %>
+    <% else %>
+      <p class="text-success">Samples are complete </p>
+    <% end %>
+  </div>
 </div>
