@@ -1,6 +1,6 @@
 <div>
 	<% if @product.nil? %>
-		<p>Create a product</p>
+		<p class="empty-dashboard btn btn-primary">Create a product</p>
 	<% end %>
 	<%= render partial: "product",  collection: @products %>
 </div>

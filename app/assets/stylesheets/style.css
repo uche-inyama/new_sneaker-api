@@ -32,3 +32,8 @@
 .username {
   align-self: center;
 }
+
+.empty-dashboard {
+  display: grid;
+  place-content: center;
+}
