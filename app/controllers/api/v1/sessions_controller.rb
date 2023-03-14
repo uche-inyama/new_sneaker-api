@@ -12,7 +12,6 @@ class Api::V1::SessionsController < Devise::SessionsController
 			time = Time.now + 24.hours.to_i
 			log_in(@user)
 			respond_to do |format|
-				# format.html { redirect_to products_path }
 				format.json {	render json: { current_user: @user, token: token, exp: time.strftime("%m-%d-%Y %H:%M")}, status: :ok }
 			end
 		else
