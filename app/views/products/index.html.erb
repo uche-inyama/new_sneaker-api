@@ -1,5 +1,5 @@
 <div class="position-relative h-100">
-	<% if @product.nil? %>
+	<% if @products.nil? %>
 		<%= link_to "Create a product", new_product_path, class: "empty-dashboard btn btn-primary" %>
 	<% end %>
 	<%= render partial: "product",  collection: @products %>

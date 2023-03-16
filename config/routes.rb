@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   }
 
   resources :products do
-    resources :samples, only: [:new, :create]
+    resources :samples
   end
   post 'cart/:product_id/add', to: 'cart#add'
   delete 'cart/:id/remove', to: 'cart#destroy'

@@ -4,7 +4,8 @@
   <p><%=product.product_discount %></p> 
   <p><%=product.marketing_statement %> 
     <span> <%= link_to  "Edit", edit_product_path(product), class: "text-decoration-none text-primary" %></span>
-    <span> <%= link_to  "Delete", product_path(product), class: "text-decoration-none text-danger" ,data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></span>
+    <span> <%= link_to  "Delete", product_path(product), class: "text-decoration-none text-danger", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></span>
+    <span> <%= link_to  "show list", product_samples_path(product), class: "text-decoration-none text-primary" %></span>
   </p>
   <div>
     <% if product.check_sample_count? %>

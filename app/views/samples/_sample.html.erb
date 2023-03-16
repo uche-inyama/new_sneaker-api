@@ -1,0 +1,8 @@
+<div>
+  <% if product.samples.count == 0 %>
+    <p> There are no samples available.</p>
+  <% else %>
+    <%= image_tag(sample.image_url, size: "150x100", class: "mb-2") %> <span><%= link_to "Edit", [product, sample] %></span>
+    <span><%= link_to "Delete",  product_sample_path(product, sample), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></span>
+  <% end %>
+</div>
