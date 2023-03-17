@@ -11,10 +11,11 @@ class SamplesController < ApplicationController
   end
 
   def create
+    redirect_to products_path, notice: "You can't exceed 4 samples per product" and return if @product.samples.count == 4
     @sample = @product.samples.build(sample_params)
     respond_to do |format|
       if @sample.save
-        format.html
+        format.html { redirect_to product_samples_path(@product)}
         format.json { render json: @sample, status: :ok }
       else 
         format.json { render json: :unprocessable_entity }
@@ -30,7 +31,7 @@ class SamplesController < ApplicationController
 
   def update
     if @sample.update(sample_params)
-      redirect_to products_path
+      redirect_to product_samples_path(@product)
     else
       render :edit
     end
@@ -38,7 +39,7 @@ class SamplesController < ApplicationController
 
   def destroy
     @sample.destroy
-    redirect_to edit_product_sample_path
+    redirect_to product_samples_path(@product)
   end
 
   def sample_params
