@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
 		@products = Product.all
 		respond_to do |format|
 			format.json { render json: @products, status: :ok }
-			format.html
+			format.html 
 		end
 	end
 

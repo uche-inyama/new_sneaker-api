@@ -1,8 +1,7 @@
 class CartController < ApplicationController
   before_action :set_cart, only: [:add]
 
-  
-  def add
+    def add
     @product = Product.find(params[:product_id])
     @quantity = params[:quantity]
     current_orderable = @cart.orderables.find_by(product_id: @product.id)

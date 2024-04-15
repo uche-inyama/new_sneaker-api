@@ -1,6 +1,7 @@
 .navigation {
   padding: 20px 0;
   grid-template-columns: 1fr 3fr 1fr;
+  align-items: center;
 }
 
 .text-decoration-none {

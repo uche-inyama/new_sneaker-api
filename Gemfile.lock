@@ -112,6 +112,7 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
+    foreman (0.87.2)
     globalid (1.1.0)
       activesupport (>= 5.0)
     http (4.4.1)
@@ -264,6 +265,7 @@ DEPENDENCIES
   debug
   devise
   dotenv-rails
+  foreman
   jbuilder
   jsbundling-rails
   jwt (~> 2.4)

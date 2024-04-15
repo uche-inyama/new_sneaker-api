@@ -9,6 +9,5 @@
       <strong class="username"> <%= current_admin.username %></strong>
       <%= link_to 'Sign out', destroy_admin_session_path, class: "text-decoration-none btn btn-primary", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
     </div>
-    
   <% end %>
 </div>

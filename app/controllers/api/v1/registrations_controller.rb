@@ -7,6 +7,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
+        UserMailer.with(user: @user).welcome_email.deliver_later
         format.json { render json: @user, status: :ok }
       else
         format.json { render json: :unprocessable_entity }
