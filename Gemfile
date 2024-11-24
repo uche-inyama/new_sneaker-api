@@ -78,4 +78,5 @@ gem  "shrine-cloudinary",  "~> 1.1"
 gem  "dotenv-rails"
 gem  "shrine"
 gem  "foreman"
+gem "stripe"
 

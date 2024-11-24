@@ -232,6 +232,7 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
+    stripe (13.2.0)
     thor (1.2.1)
     timeout (0.3.2)
     turbo-rails (1.3.3)
@@ -277,6 +278,7 @@ DEPENDENCIES
   shrine-cloudinary (~> 1.1)
   sprockets-rails
   stimulus-rails
+  stripe
   turbo-rails
   tzinfo-data
   web-console

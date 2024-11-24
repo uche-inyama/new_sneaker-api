@@ -2,7 +2,7 @@
   <h3><%=product.name %></h3>
   <p><%=product.product_price %></p> 
   <p><%=product.product_discount %></p> 
-  <p><%= simple_format(word_wrap(product.marketing_statement, line_width: 40)) %> 
+  <p><%= simple_format(truncate(product.marketing_statement, length: 58)) %> 
     <span> <%= link_to  "Edit", edit_product_path(product), class: "text-decoration-none text-primary" %></span>
     <span> <%= link_to  "Delete", product_path(product), class: "text-decoration-none text-danger", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></span>
     <span> <%= link_to  "show list", product_samples_path(product), class: "text-decoration-none text-primary" %></span>
