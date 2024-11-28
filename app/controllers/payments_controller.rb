@@ -12,7 +12,6 @@ class PaymentsController < ApplicationController
         amount: @amount.to_i*100,
         currency: @currency,
         payment_method_types: ['card'],
-        metadata: { user_id: @current_userId }
       )
       render json: { client_secret: payment_intent['client_secret'] }
     rescue Stripe::StripeError => e
