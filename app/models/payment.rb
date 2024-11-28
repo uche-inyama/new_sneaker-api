@@ -3,7 +3,7 @@ class Payment < ApplicationRecord
 
   validates :stripe_payment_id, presence: true, uniqueness: true
   validates :amount, presence: true
-  validates :status, inclusion: { in: %w[succeed failed processing requires_action] }
+  # validates :status, inclusion: { in: %w[succeed failed processing requires_action] }
 
   def formatted_amount
     "$#{amount / 100.0}"
