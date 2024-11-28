@@ -42,7 +42,7 @@ class WebhooksController < ApplicationController
     Payment.create!(
       stripe_payment_id: payment_intent['id'],
       amount: payment_intent['amount'],
-      status: payment_intent['status'],
+      # status: payment_intent['status'],
     )
     Rails.logger.info("Payment succeeded for ID: #{payment_intent['id']}")
     # Add logic to update your database, notify the user, etc.
