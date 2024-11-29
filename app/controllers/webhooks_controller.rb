@@ -5,7 +5,7 @@ class WebhooksController < ApplicationController
     payload = request.body.read
 
     # Verify the signature (optional but recommended)
-    endpoint_secret = Rails.application.credentials.dig(:stripe, :webhook_secret_development)
+    endpoint_secret = Rails.application.credentials.dig(:stripe, :webhook_secret_production)
     event = nil
     begin
       sig_header = request.env['HTTP_STRIPE_SIGNATURE']
