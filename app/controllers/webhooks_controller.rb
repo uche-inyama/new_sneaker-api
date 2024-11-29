@@ -47,6 +47,7 @@ class WebhooksController < ApplicationController
       user_id: extract_user_id_from_metadata(payment_intent)
     )
     user = User.find(payment.user_id)
+    debugger
     PaymentMailer.payment_success(user, payment).deliver_now
     # Rails.logger.info("Payment succeeded for ID: #{payment_intent['id']}")
     # Add logic to update your database, notify the user, etc.
