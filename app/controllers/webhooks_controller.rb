@@ -5,7 +5,7 @@ class WebhooksController < ApplicationController
     payload = request.body.read
 
     # Verify the signature (optional but recommended)
-    endpoint_secret = Rails.application.credentials.dig(:stripe, :webhook_secret)
+    endpoint_secret = Rails.application.credentials.dig(:stripe, :webhook_secret_development)
     event = nil
     begin
       sig_header = request.env['HTTP_STRIPE_SIGNATURE']
@@ -39,17 +39,30 @@ class WebhooksController < ApplicationController
   private
 
   def handle_payment_success(payment_intent)
-    Payment.create!(
+    # debugger
+    payment = Payment.create!(
       stripe_payment_id: payment_intent['id'],
       amount: payment_intent['amount'],
-      # status: payment_intent['status'],
+      status: payment_intent['status'],
+      user_id: extract_user_id_from_metadata(payment_intent)
     )
-    Rails.logger.info("Payment succeeded for ID: #{payment_intent['id']}")
+    user = User.find(payment.user_id)
+    PaymentMailer.payment_success(user, payment).deliver_now
+    # Rails.logger.info("Payment succeeded for ID: #{payment_intent['id']}")
     # Add logic to update your database, notify the user, etc.
   end
 
   def handle_payment_failure(payment_intent)
-    Rails.logger.info("Payment failed for ID: #{payment_intent['id']}")
+    user_id = extract_user_id_from_metadata(payment_intent)
+    user = User.find(user_id)
+    payment = Payment.new(
+      stripe_payment_id: payment_intent['id'],
+      amount: payment_intent['amount'],
+      status: 'failed',
+      user_id: user_id
+    )
+    PaymentMailer.payment_failure(user, payment).deliver_now
+    # Rails.logger.info("Payment failed for ID: #{payment_intent['id']}")
     # Add logic to notify the user or retry the payment
   end
 
