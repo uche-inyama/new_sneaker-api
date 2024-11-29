@@ -6,7 +6,7 @@ class WebhooksController < ApplicationController
 
     # Verify the signature (optional but recommended)
     endpoint_secret = Rails.application.credentials.dig(:stripe, :webhook_secret_production)
-    event = nil
+    # event = nil
     begin
       sig_header = request.env['HTTP_STRIPE_SIGNATURE']
       event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
@@ -46,8 +46,8 @@ class WebhooksController < ApplicationController
       status: payment_intent['status'],
       user_id: extract_user_id_from_metadata(payment_intent)
     )
+    # debugger
     user = User.find(payment.user_id)
-    debugger
     PaymentMailer.payment_success(user, payment).deliver_now
     # Rails.logger.info("Payment succeeded for ID: #{payment_intent['id']}")
     # Add logic to update your database, notify the user, etc.
