@@ -4,6 +4,7 @@
     <div class="nav-links">
       <%= link_to 'Home', products_path, class: "text-decoration-none nav-color d-block" %>
       <%= link_to "New product", new_product_path, class: "d-block nav-color text-decoration-none" if current_admin %>
+      <%= link_to "Payments", payments_path, class: "d-block nav-color text-decoration-none" if current_admin %>
     </div>
     <div class="sign-out-button">
       <strong class="username"> <%= current_admin.username %></strong>

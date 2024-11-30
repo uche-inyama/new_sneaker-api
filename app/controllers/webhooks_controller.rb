@@ -5,7 +5,7 @@ class WebhooksController < ApplicationController
     payload = request.body.read
 
     # Verify the signature (optional but recommended)
-    endpoint_secret = Rails.application.credentials.dig(:stripe, :webhook_secret_production)
+    endpoint_secret = Rails.application.credentials.dig(:stripe, :webhook_secret_development)
     # event = nil
     begin
       sig_header = request.env['HTTP_STRIPE_SIGNATURE']
@@ -46,11 +46,8 @@ class WebhooksController < ApplicationController
       status: payment_intent['status'],
       user_id: extract_user_id_from_metadata(payment_intent)
     )
-    # debugger
     user = User.find(payment.user_id)
     PaymentMailer.payment_success(user, payment).deliver_now
-    # Rails.logger.info("Payment succeeded for ID: #{payment_intent['id']}")
-    # Add logic to update your database, notify the user, etc.
   end
 
   def handle_payment_failure(payment_intent)
@@ -63,8 +60,6 @@ class WebhooksController < ApplicationController
       user_id: user_id
     )
     PaymentMailer.payment_failure(user, payment).deliver_now
-    # Rails.logger.info("Payment failed for ID: #{payment_intent['id']}")
-    # Add logic to notify the user or retry the payment
   end
 
   def extract_user_id_from_metadata(payment_intent)

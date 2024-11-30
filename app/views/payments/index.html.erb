@@ -1,0 +1,22 @@
+<h1>Payment Dashboard</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Stripe ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @payments_today.each do |payment| %>
+      <tr>
+        <td><%= payment.created_at.strftime('%Y-%m-%d')%></td>
+        <td><%= payment.formatted_amount %></td>
+        <td><%= payment.status.capitalize %></td>
+        <td><%= truncate(payment.stripe_payment_id, length: 10) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
