@@ -4,7 +4,20 @@ class PaymentsController < ApplicationController
   end
 
   def index
-    @payments_today = Payment.created_within_last_24_hours.order(created_at: :desc)
+    # I want the first query to return payments for the last 48hrs if status, start_date and end_date are empty?
+    @payments = Payment.order(created_at: :desc)
+
+    if params[:status].nil? && params[:start_date].nil? && params[:end_date].nil?
+      @payments = Payment.created_within_last_48_hours
+    end
+
+    if params[:status].present?
+      @payments = @payments.where(status: params[:status])
+    end
+
+    if params[:start_date].present? && params[:end_date].present?
+      @payments = @payments.where(created_at: params[:start_date]..params[:end_date])
+    end
   end
 
   def create_payment_intent

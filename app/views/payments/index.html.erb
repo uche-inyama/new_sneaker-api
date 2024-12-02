@@ -1,5 +1,5 @@
 <h1>Payment Dashboard</h1>
-
+<%= render partial: "filterForm" %>
 <table>
   <thead>
     <tr>
@@ -7,14 +7,14 @@
       <th>Amount</th>
       <th>Status</th>
       <th>Stripe ID</th>
+      <th>username</th>
     </tr>
   </thead>
   <tbody>
-    <% @payments_today.each do |payment| %>
+    <% @payments.each do |payment| %>
       <tr>
         <td><%= payment.created_at.strftime('%Y-%m-%d')%></td>
         <td><%= payment.formatted_amount %></td>
-        <td><%= payment.status.capitalize %></td>
         <td><%= truncate(payment.stripe_payment_id, length: 10) %></td>
       </tr>
     <% end %>

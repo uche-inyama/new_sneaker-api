@@ -1,0 +1,19 @@
+<div>
+  <%= form_with url: payments_path, method: :get, local: true do %>
+    <div>
+      <label>Status: </label>
+      <%= select_tag :status, options_for_select(['', 'succeeded', 'failed'], params[:status]) %>
+    </div>
+    <div>
+      <label>State Date: </label>
+      <%= date_field_tag :start_date, params[:start_date]%>
+    </div>
+    <div>
+      <label>End Date: </label>
+      <%= date_field_tag :end_date, params[:end_date]%>
+    </div>
+    <div>
+      <%= submit_tag 'Filter', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
