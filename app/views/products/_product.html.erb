@@ -1,7 +1,7 @@
 <div class="container pb-4">
   <div class="card shadow-sm mb-4">
     <div class="row g-0">
-      <!-- Product Image (from the first sample) -->
+      <!-- Product Image -->
       <div class="col-md-4">
         <% if product.samples.any? %>
           <%= image_tag product.samples.first.image_url(cloud_name: ENV["CLOUD_NAME"]), alt: "#{product.name} image", class: "img-fluid rounded-start" %>
@@ -10,31 +10,32 @@
         <% end %>
       </div>
 
+      <!-- Product Details -->
       <div class="col-md-8">
         <div class="card-body">
+          <!-- Product Title and Price -->
           <h3 class="card-title"><%= product.name %></h3>
           <p class="text-muted"><%= number_to_currency(product.product_price) %></p>
-          <p class="text-warning"><%= number_to_currency(product.product_discount) %> off</p>
+          <p class="text-warning">Discount: <%= (product.product_discount) %>% </p>
           <p class="text-truncate" style="max-width: 500px;"><%= simple_format(truncate(product.marketing_statement, length: 58)) %></p>
 
-          <div class="d-flex justify-content-start mt-3">
-            <span class="me-3">
-              <%= link_to "Edit", edit_product_path(product), class: "btn btn-outline-primary btn-sm text-decoration-none" %>
-            </span>
-            <span class="me-3">
-              <%= link_to "Delete", product_path(product), class: "btn btn-outline-danger btn-sm text-decoration-none", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
-            </span>
-            <span class="me-3">
-              <%= link_to "Show List", product_samples_path(product), class: "btn btn-outline-info btn-sm text-decoration-none" %>
-            </span>
+          <!-- Admin Action Buttons -->
+          <div class="d-flex justify-content-start mt-3 gap-2">
+            <%= link_to "Edit Product", edit_product_path(product), class: "btn btn-outline-primary btn-sm" %>
+            <%= link_to "Delete Product", product_path(product), class: "btn btn-outline-danger btn-sm", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+            <%= link_to "Manage Samples", product_samples_path(product), class: "btn btn-outline-info btn-sm" %>
+            <% if product.check_sample_count? %>
+              <%= link_to "Add Samples", new_product_sample_path(product), class: "btn btn-success btn-sm" %>
+            <% else %>
+              <span class="badge bg-success pt-2">Samples Complete</span>
+            <% end %>
           </div>
 
+          <!-- Stock Information -->
           <div class="mt-3">
-            <% if product.check_sample_count? %>
-              <%= link_to "Add samples", new_product_sample_path(product), class: "btn btn-success btn-sm" %>
-            <% else %>
-              <p class="text-success mb-0">Samples are complete</p>
-            <% end %>
+            <p class="mb-1"><strong>Stock:</strong> <%= product.stock %></p>
+            <p class="mb-1"><strong>Status:</strong> <%= product.low_stock? ? "Low Stock!" : "In Stock" %></p>
+            <%= button_to "Restock", restock_product_path(product, amount: 10),  method: :patch, class: "btn btn-primary btn-sm" %>
           </div>
         </div>
       </div>

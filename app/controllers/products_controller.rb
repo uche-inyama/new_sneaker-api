@@ -27,6 +27,12 @@ class ProductsController < ApplicationController
 		end
 	end
 
+  def restock
+    product = Product.find(params[:id])
+    product.restock(params[:amount].to_i)
+    redirect_to products_path, notice: "Restocked #{product.name}!"
+  end
+
 	def show
 		render json: @product
 	end

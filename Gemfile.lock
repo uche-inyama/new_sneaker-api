@@ -220,7 +220,7 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
       zeitwerk (~> 2.5)
-    rake (13.0.6)
+    rake (13.2.1)
     reline (0.3.2)
       io-console (~> 0.5)
     responders (3.1.0)

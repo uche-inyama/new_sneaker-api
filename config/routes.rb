@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   }
 
   resources :products do
+    member do
+      # post :restock
+      patch :restock
+    end
     resources :samples
   end
   resources :payments, only: [:new, :create, :index] do
