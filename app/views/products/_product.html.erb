@@ -1,17 +1,43 @@
-<div class="pb-4 font-family">
-  <h3><%=product.name %></h3>
-  <p><%=product.product_price %></p> 
-  <p><%=product.product_discount %></p> 
-  <p><%= simple_format(truncate(product.marketing_statement, length: 58)) %> 
-    <span> <%= link_to  "Edit", edit_product_path(product), class: "text-decoration-none text-primary" %></span>
-    <span> <%= link_to  "Delete", product_path(product), class: "text-decoration-none text-danger", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></span>
-    <span> <%= link_to  "show list", product_samples_path(product), class: "text-decoration-none text-primary" %></span>
-  </p>
-  <div>
-    <% if product.check_sample_count? %>
-      <%= link_to "Add samples", new_product_sample_path(product) %>
-    <% else %>
-      <p class="text-success">Samples are complete </p>
-    <% end %>
+<div class="container pb-4">
+  <div class="card shadow-sm mb-4">
+    <div class="row g-0">
+      <!-- Product Image (from the first sample) -->
+      <div class="col-md-4">
+        <% if product.samples.any? %>
+          <%= image_tag product.samples.first.image_url(cloud_name: ENV["CLOUD_NAME"]), alt: "#{product.name} image", class: "img-fluid rounded-start" %>
+        <% else %>
+          <%= image_tag "nike-mail.png", alt: "#{product.name} image", class: "img-fluid rounded-start" %>
+        <% end %>
+      </div>
+
+      <div class="col-md-8">
+        <div class="card-body">
+          <h3 class="card-title"><%= product.name %></h3>
+          <p class="text-muted"><%= number_to_currency(product.product_price) %></p>
+          <p class="text-warning"><%= number_to_currency(product.product_discount) %> off</p>
+          <p class="text-truncate" style="max-width: 500px;"><%= simple_format(truncate(product.marketing_statement, length: 58)) %></p>
+
+          <div class="d-flex justify-content-start mt-3">
+            <span class="me-3">
+              <%= link_to "Edit", edit_product_path(product), class: "btn btn-outline-primary btn-sm text-decoration-none" %>
+            </span>
+            <span class="me-3">
+              <%= link_to "Delete", product_path(product), class: "btn btn-outline-danger btn-sm text-decoration-none", data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+            </span>
+            <span class="me-3">
+              <%= link_to "Show List", product_samples_path(product), class: "btn btn-outline-info btn-sm text-decoration-none" %>
+            </span>
+          </div>
+
+          <div class="mt-3">
+            <% if product.check_sample_count? %>
+              <%= link_to "Add samples", new_product_sample_path(product), class: "btn btn-success btn-sm" %>
+            <% else %>
+              <p class="text-success mb-0">Samples are complete</p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

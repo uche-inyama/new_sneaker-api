@@ -6,7 +6,6 @@ class Payment < ApplicationRecord
   validates :status, inclusion: { in: %w[succeeded failed processing requires_action] }
 
   scope :created_within_last_48_hours, -> { where(created_at: 48.hours.ago..Time.current) }
-  # scope :signed_in_user, -> { where()}
   
   def formatted_amount
     "$#{amount / 100.0}"

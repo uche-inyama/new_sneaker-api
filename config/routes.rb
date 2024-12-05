@@ -9,11 +9,17 @@ Rails.application.routes.draw do
   resources :products do
     resources :samples
   end
-  resources :payments, only: [:new, :create, :index]
+  resources :payments, only: [:new, :create, :index] do
+    member do
+      get :receipt
+      post :send_receipt
+    end
+  end
   post 'cart/:product_id/add', to: 'cart#add'
   delete 'cart/:id/remove', to: 'cart#destroy'
 
   post 'payments/create_payment_intent', to: 'payments#create_payment_intent'
+  get 'payments/chart/view', to: 'payments#chart'
   post '/webhooks/stripe', to: 'webhooks#stripe'
 
   unauthenticated do

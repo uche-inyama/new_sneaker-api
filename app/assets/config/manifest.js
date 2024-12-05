@@ -2,3 +2,4 @@
 //= link_tree ../builds
 //= link_tree ../stylesheets
 //= link_tree ../config
+//= link chartkick.js

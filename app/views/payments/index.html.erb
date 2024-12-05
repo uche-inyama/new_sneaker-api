@@ -1,22 +1,18 @@
-<h1>Payment Dashboard</h1>
-<%= render partial: "filterForm" %>
-<table>
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Amount</th>
-      <th>Status</th>
-      <th>Stripe ID</th>
-      <th>username</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @payments.each do |payment| %>
-      <tr>
-        <td><%= payment.created_at.strftime('%Y-%m-%d')%></td>
-        <td><%= payment.formatted_amount %></td>
-        <td><%= truncate(payment.stripe_payment_id, length: 10) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container">
+  <h1>Payment Dashboard</h1>
+  <div class="d-flex justify-content-end mb-4">
+    <%= link_to 'Export to CSV', payments_path(request.query_parameters.merge(format: :csv)), class: 'btn btn-success me-2' %>
+    <%= link_to 'View Chart', payments_chart_view_path, class: 'btn btn-primary' %>
+  </div>
+
+  <%= render partial: "filterForm" %>
+
+  <% if @payments.any? %>
+    <div class="table-responsive">
+      <%= render "payments_table", payments: @payments %>
+    </div>
+    <%= paginate @payments %>
+  <% else %>
+    <p>No payments found. </p>
+  <% end %>
+</div>

@@ -1,0 +1,7 @@
+<div>
+  <h1>Receipt for your Payment</h1>
+  <p>Dear <%= @payment.user.username %>,</p>
+  <p>Thank you for your payment of <%= number_to_currency(@payment.formatted_amount) %>.</p>
+  <p>Date: <%= @payment.created_at.strftime("%B %d, %Y") %></p>
+  <p>We appreciate your business! </p>
+</div>

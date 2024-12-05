@@ -74,9 +74,15 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
-gem  "shrine-cloudinary",  "~> 1.1"
-gem  "dotenv-rails"
-gem  "shrine"
+gem "cloudinary", "~> 1.24" # For Cloudinary integration
+gem "shrine", "~> 3.5"     # For managing file uploads
+gem "shrine-cloudinary", "~> 1.1" # Connects Shrine with Cloudinary
+gem  "dotenv-rails", groups: [:development, :test]
 gem  "foreman"
 gem "stripe"
-
+gem "kaminari"
+gem "sendgrid-ruby"
+gem 'chartkick'
+gem 'groupdate'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'

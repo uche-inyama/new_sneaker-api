@@ -3,3 +3,5 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 import './stripe_payment'
 import * as bootstrap from "bootstrap"
+import "chartkick/chart.js"
+
