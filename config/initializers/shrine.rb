@@ -9,7 +9,7 @@ Cloudinary.config do |config|
   config.secure=true
 end
 
-puts "Cloudinary Cloud Name: #{ENV['CLOUD_NAME']}"
+Rails.logger.info "Cloudinary Cloud Name: #{ENV['CLOUD_NAME']}"
 
 
 Shrine.storages = {
