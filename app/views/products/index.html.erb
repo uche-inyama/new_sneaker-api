@@ -1,3 +1,8 @@
+<div class="alert alert-warning" role="alert">
+  <h4>Low Stock Alert</h4>
+  <p>You have <strong><%= @low_stock_count %></strong> products that need restocking.</p>
+</div>
+
 <div class="position-relative h-100">
 	<% if @products.nil? %>
 		<%= link_to "Create a product", new_product_path, class: "empty-dashboard btn btn-primary" %>

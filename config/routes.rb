@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       post :send_receipt
     end
   end
+
   post 'cart/:product_id/add', to: 'cart#add'
   delete 'cart/:id/remove', to: 'cart#destroy'
 

@@ -9,6 +9,8 @@ Cloudinary.config do |config|
   config.secure=true
 end
 
+Rails.logger.info "Cloudinary Cloud Name: #{ENV['CLOUDINARY_CLOUD_NAME']}"
+
 
 Shrine.storages = {
   cache: Shrine::Storage::Cloudinary.new(prefix: "cache"),

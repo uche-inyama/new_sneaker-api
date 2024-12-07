@@ -5,6 +5,8 @@ class Product < ApplicationRecord
 
   validates :stock, numericality: { greater_than_or_equal_to: 0 }
 
+  LOW_STOCK_THRESHOLD = 10
+
   def check_sample_count?
     @samples_count = self.samples.count
 		return true if @samples_count <= 3
@@ -20,5 +22,11 @@ class Product < ApplicationRecord
 
   def low_stock?
     stock < 5
+  end
+
+  def self.check_low_stock
+    where('stock < ?', LOW_STOCK_THRESHOLD).find_each do |product|
+      NotifyAdminJob.perform_later(product)
+    end
   end
 end

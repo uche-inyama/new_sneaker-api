@@ -82,10 +82,12 @@ GEM
     case_transform (0.2)
       activesupport
     chartkick (5.0.7)
+    chronic (0.10.2)
     cloudinary (1.25.0)
       aws_cf_signer
       rest-client (>= 2.0.0)
     concurrent-ruby (1.2.0)
+    connection_pool (2.4.1)
     content_disposition (1.0.0)
     crass (1.0.6)
     cssbundling-rails (1.1.2)
@@ -153,6 +155,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    logger (1.6.2)
     loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -189,7 +192,7 @@ GEM
     puma (5.6.5)
       nio4r (~> 2.0)
     racc (1.6.2)
-    rack (2.2.6.2)
+    rack (2.2.10)
     rack-cors (2.0.0)
       rack (>= 2.0.0)
     rack-test (2.0.2)
@@ -221,6 +224,10 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.2.1)
+    redis (5.3.0)
+      redis-client (>= 0.22.0)
+    redis-client (0.22.2)
+      connection_pool
     reline (0.3.2)
       io-console (~> 0.5)
     responders (3.1.0)
@@ -242,6 +249,11 @@ GEM
       down (~> 5.0)
       http (>= 3.2, < 5)
       shrine (>= 3.0.0.rc, < 4)
+    sidekiq (7.3.6)
+      connection_pool (>= 2.3.0)
+      logger
+      rack (>= 2.2.4)
+      redis-client (>= 0.22.2)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -273,6 +285,8 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     wicked_pdf (2.8.2)
       activesupport
       ostruct
@@ -301,15 +315,18 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.4, >= 7.0.4.1)
+  redis
   sendgrid-ruby
   shrine (~> 3.5)
   shrine-cloudinary (~> 1.1)
+  sidekiq
   sprockets-rails
   stimulus-rails
   stripe
   turbo-rails
   tzinfo-data
   web-console
+  whenever
   wicked_pdf
   wkhtmltopdf-binary
 

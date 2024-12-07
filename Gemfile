@@ -86,3 +86,6 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+gem 'sidekiq'
+gem 'redis'
+gem 'whenever', require: false
