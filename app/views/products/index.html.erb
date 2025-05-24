@@ -1,7 +1,14 @@
-<div class="alert alert-warning" role="alert">
-  <h4>Low Stock Alert</h4>
-  <p>You have <strong><%= @low_stock_count %></strong> products that need restocking.</p>
-</div>
+
+<% if Product.stock_list.any?  && Product.stock_list.min < 5 %>
+  <div class="alert alert-warning" role="alert">
+    <h4>Low Stock Alert</h4>
+    <% Product.all.each do |product| %>
+      <% if product.low_stock? %>
+        <p><%= product.name %></strong> has <%= product.stock %>product(s), needs restocking.</p>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
 
 <div class="position-relative h-100">
 	<% if @products.nil? %>
