@@ -1,13 +1,24 @@
 require "cloudinary"
+require "shrine"
 require "shrine/storage/cloudinary"
+require "shrine/storage/memory"
 
-
-Cloudinary.config do |config|
-  config.cloud_name=ENV["CLOUD_NAME"]
-  config.api_key=ENV["CLOUD_API_KEY"]
-  config.api_secret=ENV["CLOUD_API_SECRET"]
-  config.secure=true
+if Rails.env.production? || Rails.env.development?
+  Cloudinary.config do |config|
+    config.cloud_name=ENV["CLOUD_NAME"]
+    config.api_key=ENV["CLOUD_API_KEY"]
+    config.api_secret=ENV["CLOUD_API_SECRET"]
+    config.secure=true
+  end
 end
+
+# if Rails.env.test?
+#   Shrine.storages = {
+#     cache: Shrine::Storage::memory.new,
+#     store: Shrine::Storage::Memory.new,
+#   }
+#   Shrine.plugin :test_helpers
+# end
 
 Rails.logger.info "Cloudinary Cloud Name: #{ENV['CLOUD_NAME']}"
 

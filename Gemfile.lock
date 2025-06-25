@@ -103,6 +103,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.6.2)
+    dockerfile-rails (1.7.9)
+      rails (>= 3.0.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.8.1)
@@ -112,6 +114,11 @@ GEM
     down (5.4.0)
       addressable (~> 2.8)
     erubi (1.12.0)
+    factory_bot (6.5.1)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.4.4)
+      factory_bot (~> 6.5)
+      railties (>= 5.0.0)
     ffi (1.15.5)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
@@ -324,7 +331,9 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise
+  dockerfile-rails (>= 1.7)
   dotenv-rails
+  factory_bot_rails
   figaro
   foreman
   groupdate

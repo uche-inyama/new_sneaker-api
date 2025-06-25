@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
 				format.json { render json: @product, status: :ok }
 			else
 				format.html {render :new }
-				format.json { render json: :unprocessable_entity }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
 			end
 		end
 	end

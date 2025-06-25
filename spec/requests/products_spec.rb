@@ -51,5 +51,35 @@ RSpec.describe "Products", type: :request do
       expect(parsed["name"]).to eq("Test Product")
       end
     end
+
+    context "with invalid params" do
+      it "does not create a new Product and returns unprocessable_entity" do
+        expect {
+          post products_path, params: { product: invalid_attributes }, as: :json
+      }.not_to change(Product, :count)
+      
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(JSON.parse(response.body)).to include("name", "product_price")
+      end
+    end
+  end
+
+  describe "PATCH Update" do
+    it "updates the product and returns JSON" do
+      put product_path(product), params: {product: { name: "Updated Name"}}, as: :json
+      expect(response).to have_http_status(:ok)
+      expect(product.reload.name).to eq("Updated Name")
+    end
+  end
+
+  describe "Delete" do
+    it "deletes the product and returns a JSON" do
+      expect {
+        delete product_path(product)
+    }.to change(Product, :count).by(-1)
+      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(products_path)
+      follow_redirect!
+    end
   end
 end

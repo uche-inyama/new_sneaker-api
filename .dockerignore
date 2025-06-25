@@ -1,3 +1,6 @@
 .git
-.dockerignore
 .env
+tmp/*
+log/*
+.bundle
+node_modules

@@ -4,6 +4,9 @@ class Product < ApplicationRecord
   has_many :carts, through: :orderables
 
   validates :stock, numericality: { greater_than_or_equal_to: 0 }
+  validates :name, presence: true
+  validates :product_price, presence: true, numericality: true
+  validates :marketing_statement, presence: true
 
   LOW_STOCK_THRESHOLD = 10
 
