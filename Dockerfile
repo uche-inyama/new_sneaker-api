@@ -2,7 +2,7 @@
 # check=error=true
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=3.1.0
+ARG RUBY_VERSION=3.0.0
 FROM ruby:$RUBY_VERSION-slim AS base
 
 LABEL fly_launch_runtime="rails"
@@ -83,7 +83,7 @@ ENV RAILS_LOG_TO_STDOUT="1" \
     RAILS_SERVE_STATIC_FILES="true"
 
 # Entrypoint sets up the container.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+CMD ["bash", "-c", "bundle exec rails server -b 0.0.0.0 -p 3000"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
