@@ -1,6 +1,5 @@
 require "shrine"
 
-plugin :validation_helpers
 
 class ImageUploader < Shrine
   Attacher.validate do

@@ -51,6 +51,7 @@ Rails.application.config.after_initialize do
 
 
   Rails.logger.info "Cloudinary Cloud Name: #{cloud_name}"
+  
   Shrine.plugin :activerecord
   Shrine.plugin :cached_attachment_data
   Shrine.plugin :restore_cached_data
