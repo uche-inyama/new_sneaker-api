@@ -1,24 +1,26 @@
-# README
+# SNEAKERS SHOP API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## Demo
+[Live Link](https://new-sneaker-api.fly.dev/)
+### Credentials: 
+      email: johndoe@gmail.com, password: password
 
-* Ruby version
+## Backend code.
+[Link to backend code](https://github.com/uche-inyama/new_sneaker-api/tree/main)
+    
+## Getting Started
 
-* System dependencies
+### Prerequisites
+     ruby
+### Setup
+     Clone the repository and cd into the directory where it is saved.
+### Installation
+     Run: bundle install
+### Usage
+     Run: bin/dev or rails s
 
-* Configuration
+### Author: Inyama, Uchechukwu Henry
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+LinkedIn: [@linkedInhandle](https://www.linkedin.com/in/uchechukwu-inyama)
+This project is [MIT](./MIT.md) licensed.
