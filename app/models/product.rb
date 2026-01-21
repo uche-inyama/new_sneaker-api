@@ -14,7 +14,7 @@ class Product < ApplicationRecord
     self.count
   end
 
-   def low_stock?
+  def low_stock?
     stock < 5
   end
 
