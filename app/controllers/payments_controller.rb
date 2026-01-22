@@ -1,7 +1,7 @@
 require 'csv'
 
 class PaymentsController < ApplicationController
-  before_action :authenticate_admin!, only: [:create_payment_intent]
+  before_action :authenticate_admin!
 
   def new
   end
