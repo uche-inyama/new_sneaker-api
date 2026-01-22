@@ -2,7 +2,7 @@
 # check=error=true
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=3.1.0
+ARG RUBY_VERSION=3.2.0
 FROM ruby:$RUBY_VERSION-slim AS base
 
 LABEL fly_launch_runtime="rails"
@@ -31,7 +31,7 @@ FROM base AS build
 
 # Install packages needed to build gems and node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential libffi-dev libpq-dev libyaml-dev node-gyp pkg-config python && \
+    apt-get install --no-install-recommends -y build-essential libffi-dev libpq-dev libyaml-dev node-gyp pkg-config python-is-python3 && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install JavaScript dependencies
