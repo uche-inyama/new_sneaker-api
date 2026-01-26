@@ -1,8 +1,8 @@
 require 'csv'
 
 class PaymentsController < ApplicationController
-  before_action :authenticate_user!, only: [:create_payment_intent]
-  respond_to :json, only: [:create_payment_intent]
+  # before_action :authenticate_user!, only: [:index, :chart, :receipt, :send_receipt]
+  # respond_to :json, only: [:create_payment_intent]
 
   def new
   end
@@ -37,17 +37,28 @@ class PaymentsController < ApplicationController
     @amount = params[:amount]
     @currency = params[:currency] || 'usd'
     @current_userId = params[:currentUserId]
-    begin
-      payment_intent = Stripe::PaymentIntent.create(
-        amount: @amount.to_i*100,
-        currency: @currency,
-        payment_method_types: ['card'],
-        metadata: { user_id: @current_userId },
-      )
-      render json: { client_secret: payment_intent['client_secret'] }
-    rescue Stripe::StripeError => e
-      render json: { error: e.message }, status: 400
+    
+    payment_intent = Stripe::PaymentIntent.create(
+      amount: @amount.to_i*100,
+      currency: @currency,
+      payment_method_types: ['card'],
+      metadata: { user_id: @current_userId },
+    )
+
+    payment = Payment.create(
+      user_id: @current_userId,
+      amount: @amount.to_i,
+      currency: @currency,
+      stripe_payment_id: payment_intent.id,
+      status: payment_intent.status
+    )
+
+    if payment.persisted?
+      render json: { client_secret: payment_intent.client_secret, payment_id: payment.id }
+    else
+      render json: { error: payment.errors.full_messages }, status: 400
     end
+      
   end
 
   def receipt

@@ -1,25 +1,59 @@
-<div class="d-flex justify-content-center align-items-center h-75 w-75">
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "current-password" %>
-    </div>
-
-    <% if devise_mapping.rememberable? %>
-      <div class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
+<div class="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center p-4">
+  <div class="w-full max-w-md">
+    <!-- Login Card -->
+    <div class="bg-white rounded-2xl shadow-2xl p-8">
+      
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">Admin Login</h1>
+        <p class="text-gray-500 text-sm">Please sign in to your account</p>
       </div>
-    <% end %>
 
-    <div class="actions">
-      <%= f.submit "Log in" %>
+      <!-- Form -->
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        
+        <!-- Email Field -->
+        <div class="mb-6">
+          <%= f.label :email, "Email Address", class: "block text-sm font-semibold text-gray-700 mb-2" %>
+          <%= f.email_field :email, 
+              autofocus: true, 
+              autocomplete: "email",
+              placeholder: "you@example.com",
+              class: "w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition-all duration-200 outline-none bg-gray-50 focus:bg-white" %>
+        </div>
+
+        <!-- Password Field -->
+        <div class="mb-6">
+          <%= f.label :password, "Password", class: "block text-sm font-semibold text-gray-700 mb-2" %>
+          <%= f.password_field :password, 
+              autocomplete: "current-password",
+              placeholder: "Enter your password",
+              class: "w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition-all duration-200 outline-none bg-gray-50 focus:bg-white" %>
+        </div>
+
+        <!-- Remember Me & Forgot Password -->
+        <% if devise_mapping.rememberable? %>
+          <div class="mb-6 flex items-center justify-between">
+            <div class="flex items-center">
+              <%= f.check_box :remember_me, class: "w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 cursor-pointer" %>
+              <%= f.label :remember_me, class: "ml-2 text-sm text-gray-600 cursor-pointer select-none" %>
+            </div>
+            <!-- Add forgot password link here if needed -->
+          </div>
+        <% end %>
+
+        <!-- Submit Button -->
+        <div class="mb-6">
+          <%= f.submit "Sign In", 
+              class: "w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-3 px-4 rounded-lg hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-indigo-300 transform transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl cursor-pointer" %>
+        </div>
+
+        <!-- Links Section -->
+        <div class="text-center">
+          <%= render "admins/shared/links" %>
+        </div>
+        
+      <% end %>
     </div>
-  <%= render "admins/shared/links" %>
-  <% end %>
+  </div>
 </div>

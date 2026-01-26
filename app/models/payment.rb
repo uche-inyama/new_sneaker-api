@@ -3,7 +3,18 @@ class Payment < ApplicationRecord
 
   validates :stripe_payment_id, presence: true, uniqueness: true
   validates :amount, presence: true
-  validates :status, inclusion: { in: %w[succeeded failed processing requires_action] }
+  validates :status, inclusion: { 
+    in: %w[
+      requires_payment_method 
+      requires_confirmation 
+      requires_action 
+      processing 
+      succeeded 
+      canceled
+      failed
+    ] 
+  }
+  # validates :status, inclusion: { in: %w[succeeded failed processing requires_action] }
 
   scope :created_within_last_48_hours, -> { where(created_at: 48.hours.ago..Time.current) }
   

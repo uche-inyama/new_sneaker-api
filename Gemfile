@@ -94,3 +94,4 @@ gem 'whenever', require: false
 gem 'figaro'
 
 gem "dockerfile-rails", ">= 1.7", :group => :development
+gem "tailwindcss-rails"
